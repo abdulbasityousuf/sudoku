@@ -167,7 +167,7 @@ public class SudokuSolverOptimizedWithUIMultiThreaded {
         return solution[0];
     }
 
-    private boolean checkColDups(List<List<String>> rows) {
+    private boolean checkColDups_regex(List<List<String>> rows) {
 
         for (int j = 0; j < 9; j++) {
             String col = "";
@@ -176,6 +176,24 @@ public class SudokuSolverOptimizedWithUIMultiThreaded {
             }
             if (p.matcher(col).matches()) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkColDups(List<List<String>> rows) {
+
+        for (int j = 0; j < 9; j++) {
+            List<String> col = new ArrayList<>();
+            for (int i = 0; i < rows.size(); i++) {
+                col.add(rows.get(i).get(j));
+            }
+            for (int a = 0; a < col.size(); a++) {
+                for (int k = a + 1; k < col.size(); k++) {
+                    if (col.get(a).equals(col.get(k))) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
