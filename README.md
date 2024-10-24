@@ -174,7 +174,7 @@ The above implementation in Java is quite good, but the reality is we live in a 
 
 But why do we intrinsically only think that we can use the GPU for AI only (and gaming!). The foundations of AI rest on large language modals or LLMs, which are nothing but tensors multiplied together as matrixes over and over again. Can we not, and should we not be thinking about using the same idea - but this time to make algorithms more efficient?
 
-I attempt to demonstrate this below. Before I ventured into this, I was thinking about keeping the algorithm in Java, and just enhancing the looping mechanism on CUDA, and I learnt about [TornadoVM](https://www.tornadovm.org/). Unfortunately, due to limitations of my machine (lack of linux), I couldn't really get it to work - and so am forced to implement in python. You can view the script [here](src/sudoku_solver_gpu.py).
+I attempt to demonstrate this below. Before I ventured into this, I was thinking about keeping the algorithm in Java, and just enhancing the looping mechanism on CUDA, and I learnt about [TornadoVM](https://www.tornadovm.org/). Unfortunately, due to limitations of my machine (lack of linux), I couldn't really get it to work - and so am forced to implement in python. You can view the script [here](https://github.com/abdulbasityousuf/sudoku/blob/main/src/sudoku_solver_gpu.py).
 
 We leverage a library called [numba](https://numba.pydata.org/) to do our "looping" across the GPU. We took a very complex Suduko problem and the result was not too bad on my laptop T600 GPU:
 
