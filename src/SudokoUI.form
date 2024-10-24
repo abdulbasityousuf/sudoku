@@ -1788,7 +1788,7 @@
         </constraints>
         <properties>
           <enabled value="true"/>
-          <indeterminate value="true"/>
+          <indeterminate value="false"/>
         </properties>
       </component>
       <scrollpane id="2cf17" binding="scrollpane">

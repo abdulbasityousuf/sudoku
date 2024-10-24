@@ -1,5 +1,6 @@
+import javax.swing.*;
+import javax.swing.event.ChangeListener;
 import java.util.*;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +10,7 @@ public class SudokuSolverOptimizedWithUIMultiThreaded {
 
     Pattern p = Pattern.compile("\\w*(\\w)\\w*\\1+\\w*");
 
-    public List<List<String>> solve(String[][] board) {
+    public List<List<String>> solve(String[][] board, JProgressBar model) {
         List<List<String>> missingNumbers = new ArrayList<>();
         for (int i = 0; i < board.length; i++) {
             List<String> chars = Arrays.asList(board[i]);
@@ -47,22 +48,23 @@ public class SudokuSolverOptimizedWithUIMultiThreaded {
         }
 
         //next traverse solution space
-        return traverseSolutionSpace(solutionSpace);
+        return traverseSolutionSpace(solutionSpace, model);
 
     }
 
-    private List<List<String>> traverseSolutionSpace(final List<List<List<String>>> solutionSpace) {
-        final ExecutorService executor = Executors.newFixedThreadPool(8);
+    private List<List<String>> traverseSolutionSpace(final List<List<List<String>>> solutionSpace, JProgressBar model) {
+        final ExecutorService executor = Executors.newFixedThreadPool(10);
         final List<List<String>>[] solution = new List[]{null};
         for (int i0Out = 0; i0Out < solutionSpace.get(0).size(); i0Out++) {
             final int i0 = i0Out;
             executor.submit(() -> {
                 System.out.println("Progress i0 " + i0 + " of " + solutionSpace.get(0).size());
+                model.setValue((int)(((double)i0/(double) solutionSpace.get(0).size()) * 100));
                 for (int i1 = 0; i1 < solutionSpace.get(1).size(); i1++) {
                     if (checkColDups(Arrays.asList(solutionSpace.get(0).get(i0), solutionSpace.get(1).get(i1)))) {
                         continue;
                     } else {
-                        System.out.println("Progress i1 " + i0 + " " + i1 + " of " + solutionSpace.get(1).size() + " in thread " + Thread.currentThread().getId());
+//                        System.out.println("Progress i1 " + i0 + " " + i1 + " of " + solutionSpace.get(1).size() + " in thread " + Thread.currentThread().getId());
                     }
                     for (int i2 = 0; i2 < solutionSpace.get(2).size(); i2++) {
                         List<List<String>> rows = Arrays.asList(
@@ -75,7 +77,7 @@ public class SudokuSolverOptimizedWithUIMultiThreaded {
                                 !checkRange(0, 2, 6, 8, rows)) {
                             continue;
                         } else {
-                            System.out.println("Progress i2 " + i0 + " " + i1 + " " + i2 + " of " + solutionSpace.get(2).size()  + " in thread " + Thread.currentThread().getId());
+//                            System.out.println("Progress i2 " + i0 + " " + i1 + " " + i2 + " of " + solutionSpace.get(2).size()  + " in thread " + Thread.currentThread().getId());
                         }
                         for (int i3 = 0; i3 < solutionSpace.get(3).size(); i3++) {
                             if (checkColDups(Arrays.asList(
@@ -288,7 +290,7 @@ public class SudokuSolverOptimizedWithUIMultiThreaded {
                         {".", "7", ".", "5", "6", ".", ".", ".", "."}};
 
 
-        new SudokuSolverOptimizedWithUIMultiThreaded().solve(b);
+        new SudokuSolverOptimizedWithUIMultiThreaded().solve(b, new JProgressBar());
 
     }
 }

@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="hamcrest-core-1.3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jline-3.21.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-4.13.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/progressbar-0.9.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tornado-api-1.0.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tornado-matrices-1.0.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

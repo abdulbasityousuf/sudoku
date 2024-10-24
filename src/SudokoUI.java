@@ -129,7 +129,7 @@ public class SudokoUI {
                             {getString(comboBox64.getSelectedItem()), getString(comboBox65.getSelectedItem()), getString(comboBox66.getSelectedItem()), getString(comboBox67.getSelectedItem()), getString(comboBox68.getSelectedItem()), getString(comboBox69.getSelectedItem()), getString(comboBox70.getSelectedItem()), getString(comboBox71.getSelectedItem()), getString(comboBox72.getSelectedItem())},
                             {getString(comboBox73.getSelectedItem()), getString(comboBox74.getSelectedItem()), getString(comboBox75.getSelectedItem()), getString(comboBox76.getSelectedItem()), getString(comboBox77.getSelectedItem()), getString(comboBox78.getSelectedItem()), getString(comboBox79.getSelectedItem()), getString(comboBox80.getSelectedItem()), getString(comboBox81.getSelectedItem())}
                         };
-                        List<List<String>> solution = new SudokuSolverOptimizedWithUIMultiThreaded().solve(model);
+                        List<List<String>> solution = new SudokuSolverOptimizedWithUIMultiThreaded().solve(model, progressBar1);
                         setSolution(comboBox1, solution, 0, 0);
                         setSolution(comboBox2, solution, 0, 1);
                         setSolution(comboBox3, solution, 0, 2);
@@ -302,6 +302,7 @@ public class SudokoUI {
         frame.pack();
         frame.setLocationRelativeTo(null);
         sudokoUI.progressBar1.setVisible(false);
+        sudokoUI.progressBar1.setStringPainted(true);
         frame.setVisible(true);
         PrintStream printStream = new PrintStream(new CustomOutputStream(sudokoUI.textArea1));
         System.setOut(printStream);
