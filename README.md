@@ -1,4 +1,4 @@
-# A not so Simple Brute Force Sudoku Solver in Java
+# A not so Simple Brute Force Sudoku Solver in Java and Python (CUDA)
 
 ## Background
 
@@ -9,6 +9,8 @@ The motivation behind this project is to showcase certain advanced programming c
 - Using **Multithreading** to help expedite the search process
 
 All the while, we will also see that even though we are using brute force to solve this problem, traversing the brute force plane requires a good understanding of Sudoku and even though the algorithm is brute force, it is complicated to solve.
+
+Later, we will switch gears and solve the same problem in Python using CUDA.
 
 ## Sample UI
 The following are a couple of screenshots to help demonstrate the application:
@@ -163,3 +165,17 @@ Finally, we keep wait for the `ExecutorService` to terminate. I give it a timeou
 ```
 
 I hope this demonstrates how easy it is to manage multi-threading now in Java.
+
+<hr>
+
+# Implementation in Python using CUDA
+
+The above implementation in Java is quite good, but the reality is we live in a world of AI - and one of the major progresses we have made is leveraging the GPU to do our bidding.
+
+But why do we intrinsically only think that we can use the GPU for AI only (and gaming!). The foundations of AI rest on large language modals or LLMs, which are nothing but tensors multiplied together as matrixes over and over again. Can we not, and should we not be thinking about using the same idea - but this time to make algorithms more efficient?
+
+I attempt to demonstrate this below. Before I ventured into this, I was thinking about keeping the algorithm in Java, and just enhancing the looping mechanism on CUDA, and I learnt about [TornadoVM](https://www.tornadovm.org/). Unfortunately, due to limitations of my machine (lack of linux), I couldn't really get it to work - and so am forced to implement in python. You can view the script [here](src/suduko_solver_gpu.py).
+
+We leverage a library called [numba](https://numba.pydata.org/) to do our "looping" across the GPU. We took a very complex Suduko problem and the result was not too bad on my laptop T600 GPU:
+
+![](img/gpu_solution.png)
